@@ -1,7 +1,6 @@
 import React from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Notifications, Permissions} from "expo";
-//import * as Permissions from 'expo-permissions';
 
 
 const NOTIFICATION_KEY = "MobileFlashcards:notifications"
@@ -9,7 +8,7 @@ const NOTIFICATION_KEY = "MobileFlashcards:notifications"
 function createNotification() {
     return {
         title: "Study Flashcards Reminder",
-        body: "Do not forget to study today!",
+        body: "Hey you! Do not forget to study today!",
         ios: {
             sound: true,
         },
