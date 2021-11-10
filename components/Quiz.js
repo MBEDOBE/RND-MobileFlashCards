@@ -49,8 +49,8 @@ export class Quiz extends Component {
       () => {
         const { correct, incorrect, numQuestions } = this.state;
 
-        if (numQuestions === correct + incorrect) {
-          this.resetNotification();
+        if (numQuestions + 1 === correct + incorrect) {
+          //clearLocalNotification().then(setLocalNotification);
           this.setState({ show: screen.RESULT });
         } else {
           this.setState((prevState) => ({
