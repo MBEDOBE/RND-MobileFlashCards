@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-
+import { removeDeck } from "../actions/index";
+import { removeEntry } from "../utils/api";
 class DeckView extends Component {
+  handleDelete = () => {
+    console.log("title", this.props.title);
+    const id = this.props.title;
+    this.props.dispatch(removeDeck(id));
+    removeEntry(id);
+    this.props.navigation.goBack();
+  };
   render() {
     const { title, questions, navigation } = this.props;
     console.log("deck info", title);
@@ -34,6 +42,11 @@ class DeckView extends Component {
             onPress={() => navigation.navigate("Quiz", { title: title })}
           >
             <Text style={[styles.btnText, { color: "#fff" }]}>Start Quiz</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.submitBtn}>
+          <TouchableOpacity onPress={this.handleDelete}>
+            <Text style={[styles.btnText, { color: "#fff" }]}>Delete</Text>
           </TouchableOpacity>
         </View>
       </View>

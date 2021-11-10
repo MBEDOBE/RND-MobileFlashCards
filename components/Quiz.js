@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import Swiper from "react-native-swiper";
 import { connect } from "react-redux";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 const screen = {
   QUESTION: "question",
@@ -49,6 +50,7 @@ export class Quiz extends Component {
         const { correct, incorrect, numQuestions } = this.state;
 
         if (numQuestions === correct + incorrect) {
+          this.resetNotification();
           this.setState({ show: screen.RESULT });
         } else {
           this.setState((prevState) => ({
@@ -66,6 +68,11 @@ export class Quiz extends Component {
       answered: Array(prevState.questions).fill(0),
     }));
   };
+
+  resetNotification = () => {
+    clearLocalNotification().then(setLocalNotification);
+  };
+
   render() {
     const { deck, navigation } = this.props;
     const { questions } = deck;

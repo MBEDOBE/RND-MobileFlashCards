@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { addDeck } from "../actions/index";
+import { saveDeckTitle } from "../utils/api";
 
 class AddDeck extends Component {
   state = {
@@ -30,9 +31,13 @@ class AddDeck extends Component {
       questions: [],
     };
     addDeck(deck);
+    //reroute requirement fix
+    saveDeckTitle(deckName);
+    navigation.navigate("DeckView", { title: deckName });
+
     this.setState(() => ({ deckName: "" }));
-    navigation.goBack();
   };
+
   render() {
     const { deckName } = this.state;
     return (
@@ -57,9 +62,10 @@ class AddDeck extends Component {
               placeholder="Type the deck title"
             />
           </View>
-
+          {/*disable button when textbox empty suggestion fix */}
           <View style={styles.button}>
             <TouchableOpacity
+              disabled={this.state.deckName === ""}
               style={styles.submitBtn}
               onPress={this.submitDeck}
             >

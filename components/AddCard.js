@@ -70,8 +70,10 @@ class AddCard extends Component {
             value={answer}
             placeholder="Type the answer"
           />
+          {/*disable button when textbox empty suggestion fix */}
           <View style={styles.button}>
             <TouchableOpacity
+              disabled={this.state.question === "" || this.state.answer === ""}
               style={styles.submitBtn}
               onPress={this.handleSubmitQuestion}
             >

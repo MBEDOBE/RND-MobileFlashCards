@@ -1,20 +1,25 @@
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import  {Notifications}  from "expo";
+import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
-const NOTIFICATION_KEY = "MobileFlashcards:notifications";
+const NOTIFICATION_KEY = "mobile-flashcards:notifications";
 
-function createNotification() {
+export function clearLocalNotification() {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
+    Notifications.cancelAllScheduledNotificationsAsync
+  );
+}
+
+export function createNotification() {
   return {
-    title: "Study Flashcards Reminder",
-    body: "Hey you! Do not forget to study today!",
-    ios: {
-      sound: true,
-    },
+    title: "🔔Remember to Study! ",
+    body: "Hey! you don't forget to study today!",
     android: {
       sound: true,
+      priority: "high",
       sticky: false,
+      vibrate: true,
     },
   };
 }
@@ -28,9 +33,7 @@ export function setLocalNotification() {
           if (status === "granted") {
             Notifications.cancelAllScheduledNotificationsAsync();
             let tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(20);
-            tomorrow.setMinutes(0);
+            tomorrow.setSeconds(tomorrow.getSeconds() + 5);
 
             Notifications.scheduleLocalNotificationAsync(createNotification(), {
               time: tomorrow,
