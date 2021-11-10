@@ -34,7 +34,7 @@ class DeckView extends Component {
           <TouchableOpacity
             onPress={() => navigation.navigate("AddCard", { title: title })}
           >
-            <Text style={styles.btnText}>Add Card</Text>
+            <Text style={styles.btnText}>Add Question</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.submitBtn}>
