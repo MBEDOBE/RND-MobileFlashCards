@@ -11,10 +11,10 @@ export function clearLocalNotification() {
   );
 }
 
-export function createNotification() {
+function createNotification() {
   return {
-    title: "🔔Remember to Study! ",
-    body: "Hey! you don't forget to study today!",
+    title: "Reminder",
+    body: "👋 don't forget to study today!",
     android: {
       sound: true,
       priority: "high",
@@ -32,13 +32,19 @@ export function setLocalNotification() {
         Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
           if (status === "granted") {
             Notifications.cancelAllScheduledNotificationsAsync();
-            let tomorrow = new Date();
-            tomorrow.setSeconds(tomorrow.getSeconds() + 5);
 
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(20);
+            tomorrow.setMinutes(0);
+
+            //Notifications.presentLocalNotificationAsync(createNotification())
             Notifications.scheduleLocalNotificationAsync(createNotification(), {
               time: tomorrow,
               repeat: "day",
             });
+
+            console.log("Notification scheduled.")
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           }
         });
