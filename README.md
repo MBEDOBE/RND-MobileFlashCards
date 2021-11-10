@@ -33,3 +33,16 @@ This project has been tested on the following platforms:
 
 - iOS 12 pro (expo snack simulator)
 - Android 8+.
+
+## Author
+
+- **KUNJI, Daniel Mbedobe**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+- Thank you to all the creators on youtube whose questions / videos helped to surmount some bottle necks along the way
+- Thank you to all who asked or answered questions i found useful on stack overflow, your questions and answers realy helped
